@@ -1,42 +1,136 @@
-#root {
-  max-width: 1280px;
+/* Make the whole app a flex container */
+.app-container {
+  display: flex;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 20px;
+  gap: 40px;
+  align-items: flex-start; /* Aligns items to the top */
+}
+
+/* The Left/Center side takes up available space */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* The Right Sidebar */
+.sidebar {
+  width: 250px;
+  background: #fdfbf7;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 20px; /* Keeps it visible when scrolling */
+}
+
+.sidebar-section {
+  margin-bottom: 2rem;
+}
+
+.sidebar h3 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #2c3e50;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 5px;
+}
+
+.sidebar select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: white;
+  cursor: pointer;
+}
+
+.sidebar-info p {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* Mobile Responsiveness: Stack them on small screens */
+@media (max-width: 900px) {
+  .app-container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%; /* Full width on mobile */
+    position: static;
+  }
+}
+
+/* Add this to the VERY TOP of src/App.css */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5; /* Light grey background */
+  color: #333; /* Dark text */
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* --- New Camera Placeholder Styles --- */
+
+.video-stage {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  aspect-ratio: 4 / 3; /* Keeps the same shape as standard webcam */
+  background-color: #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden; /* Ensures rounded corners work */
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.placeholder-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #7f8c8d;
+  background-color: #ecf0f1;
+}
+
+.placeholder-content {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.start-btn {
+  background-color: #27ae60; /* Green for "Go" */
+  font-weight: bold;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.start-btn:hover {
+  background-color: #2ecc71;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+/* Ensure video fills the stage when active */
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Prevents stretching */
 }
